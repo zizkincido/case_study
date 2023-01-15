@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form id="user-form">
+        <label>Ad-Soyad: <input type="text" name="name"></label>
+        <label>Email: <input type="email" name="email"></label>
+        <label>Cinsiyet: 
+          <select name="gender">
+            <option value="female">Kadın</option>
+            <option value="male">Erkek</option>
+            <option value="other">Belirtmek istemiyorum</option>
+          </select>
+        </label>
+        <input type="submit" value="Kaydet">
+    </form>
+      
+
+
+    <input type="text" id="user-id">
+    <button id="query-button">Sorgula</button>
+    <div id="user-info"></div>
+    <div id="post_list"></div>
+      
+    
+
+    
+<form id="todo-form">
+    <label>Kullanıcı ID: <input type="text" name="user_id"></label>
+    <label>Yeni To-Do: <input type="text" name="new_todo"></label>
+    <label>Bitiş Zamanı: <input type="date" name="due_on"></label>
+    <label>Durum: 
+        <select name="todo_status">
+          <option value="pending">Bekliyor</option>
+          <option value="completed">Tamamlandı</option>
+        </select>
+      </label>
+    <input type="submit" value="Ekle">
+</form>
+<script src="index.js"></script>
+</body>
+</html>
