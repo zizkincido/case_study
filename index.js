@@ -1,84 +1,90 @@
-document.querySelector("#query-button").addEventListener("click", function() {
-    var id = document.querySelector("#user-id").value;
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", `https://gorest.co.in/public/v2/users/${id}`);
-    xhr.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-            var userInfo = "Ad-Soyad: " + data.name + "<br>"
-                        + " "
-                       + " Email: " + data.email + "<br>"
-                       + " Cinsiyet: " + data.gender + "<br>"
-                       + " Status: " + data.status;
-            document.querySelector("#user-info").innerHTML = userInfo;
-        }
-        
-    };
-    xhr.send();
-    var id = document.querySelector("#user-id").value;
-    var xhr_post = new XMLHttpRequest();
-    xhr_post.open("GET", `https://gorest.co.in/public/v2/users/${id}/posts`);
-    xhr_post.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
-    xhr_post.onload = function() {
-        if (xhr_post.status === 200) {
-            var data_post = JSON.parse(xhr_post.responseText);
-            if(data_post.meta.count === 0) {
-                console.log("This user doesn't have any post.");
-            }
-            else {
-                var post_list = data_post.data;
-                var post_list_element = document.querySelector("#post_list");
-                for(var i = 0; i < post_list.length; i++) {
-                    var post_element = document.createElement("div");
-                    post_element.innerHTML = "Post ID: " + post_list[i].id + "<br>" +
-                    "Post Title: " + post_list[i].title + "<br>" +
-                    "Post Body: " + post_list[i].body;
-                    post_list_element.appendChild(post_element);
-                }
-            }
-        }
-        
-    };
-    xhr_post.send();
+const API_URL = "https://gorest.co.in/public/v2";
+const fetch_request = async (endpoint, values, method_type) => {
+  return await fetch(`${API_URL}/${endpoint}`, {
+    method: method_type,
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f`,
+    },
+    ...(Object.keys(values).length !== 0 && { body: JSON.stringify(values) }),
+  });
+};
+
+document.querySelector("#query-button").addEventListener("click", function (e) {
+  e.preventDefault();
+  var searchValue = document.getElementById("search-user-id").value;
+  console.log(searchValue);
+  fetch_request(`users/${searchValue}`, {}, "GET")
+    .then((response) => response.json())
+    .then((json) => {
+      document.querySelector(
+        "#user-info"
+      ).innerHTML = `İsim-Soyisim: ${json.name}<br>
+        E-mail: ${json.email}<br>
+        Gender: ${json.gender}<br>
+        Status: ${json.status}`;
+    });
+
+  console.log(searchValue);
+  fetch_request(`users/${searchValue}/posts`, {}, "GET")
+    .then((response) => response.json())
+    .then((json) => {
+      if (json.length === 0) {
+        document.querySelector("#post_list").innerHTML = `Postu Yok`;
+      }
+      for (let index = 0; index < json.length; index++) {
+        document.querySelector(
+          "#post_list"
+        ).innerHTML = `Post ID: ${json[index].id}<br>
+        Post Başlığı: ${json[index].title}<br>
+        Post İçeriği: ${json[index].body}`;
+      }
+    });
 });
-    
-        
-    
 
-
-  document.querySelector("#user-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    var formData = new FormData(document.querySelector("#user-form"));
-    var status = "inactive";
-    if (formData.get("gender") === "female" || formData.get("gender") === "male") {
-        status = "active";
+document.querySelector("#user-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var formData = new FormData(document.querySelector("#user-form"));
+  var status = "inactive";
+  if (
+    formData.get("gender") === "female" ||
+    formData.get("gender") === "male"
+  ) {
+    status = "active";
+  }
+  formData.append("status", status);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://gorest.co.in/public/v2/users");
+  xhr.setRequestHeader(
+    "Authorization",
+    "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f"
+  );
+  xhr.onload = function () {
+    if (xhr.status === 201) {
+      var data = JSON.parse(xhr.responseText);
+      console.log(data);
     }
-    formData.append("status", status);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://gorest.co.in/public/v2/users");
-    xhr.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
-    xhr.onload = function() {
-        if (xhr.status === 201) {
-            var data = JSON.parse(xhr.responseText);
-            console.log(data);
-        }
-    };
-    xhr.send(formData);
+  };
+  xhr.send(formData);
 });
-document.querySelector("#todo-form").addEventListener("submit", function(event) {
+document.querySelector("#todo-form")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
-    var id = document.querySelector("#user-id").value;
-    var formData = new FormData(document.querySelector("#todo-form"));
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", `https://gorest.co.in/public/v2/users/${id}/todos`);
-    xhr.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
-    xhr.onload = function() {
-        if (xhr.status === 201) {
-            console.log("To-do başarıyla eklendi!");
-        } else {
-            console.log("Ekleme işlemi başarısız oldu. Hata: " + xhr.responseText);
-        }
-    };
-    xhr.send(formData);
-});
+    const formData = new FormData(document.querySelector("#todo-form"));
+
+    const todoData = {}
+    for (var pair of formData.entries()) {
+      todoData[pair[0]] = pair[1]
+    }
+    console.log(todoData)
+
+    fetch_request(`users/${todoData.user_id}/todos`, todoData, "POST")
+      .then((resp) => {
+        console.log(resp)
+        alert('To-do Başarıyla Oluşturuldu!')
+        
+      })
+      .catch((err) =>
+        console.error("Ekleme işlemi başarısız oldu. Hata: " + err)
+      );
+  });

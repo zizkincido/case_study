@@ -21,21 +21,23 @@
     </form>
       
 
-    <form>
-        <label>Kullanıcı ID: <input type="text" id="user-id"></label>
-        <button id="query-button">Sorgula</button>
+    <form id="query-form">
+        <label>Kullanıcı ID: <input type="text" id="search-user-id"></label>       
+        <h4>Kullanıcı bilgileri</h4>
         <div id="user-info"></div>
+        <h4>Post bilgileri</h4>
         <div id="post_list"></div>
+        <button id="query-button">Sorgula</button>
     </form>
     
 
     
 <form id="todo-form">
-    <label>Kullanıcı ID: <input type="text" name="user-id"></label>
-    <label>Yeni To-Do: <input type="text" name="new_todo"></label>
-    <label>Bitiş Zamanı: <input type="date" name="due_on"></label>
+    <label>Kullanıcı ID: <input type="text" name="user_id"></label>
+    <label>Yeni To-Do: <input type="text" name="title"></label>
+    <label>Bitiş Zamanı: <input type="datetime-local" name="due_on"></label>
     <label>Durum: 
-        <select name="todo_status">
+        <select name="status">
           <option value="pending">Bekliyor</option>
           <option value="completed">Tamamlandı</option>
         </select>
