@@ -1,7 +1,7 @@
 document.querySelector("#query-button").addEventListener("click", function() {
     var id = document.querySelector("#user-id").value;
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://gorest.co.in/public/v2/users/" + id);
+    xhr.open("GET", `https://gorest.co.in/public/v2/users/${id}`);
     xhr.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
     xhr.onload = function() {
         if (xhr.status === 200) {
@@ -18,7 +18,7 @@ document.querySelector("#query-button").addEventListener("click", function() {
     xhr.send();
     var id = document.querySelector("#user-id").value;
     var xhr_post = new XMLHttpRequest();
-    xhr_post.open("GET", "https://gorest.co.in/public/v2/posts?user_id="+ id);
+    xhr_post.open("GET", `https://gorest.co.in/public/v2/users/${id}/posts`);
     xhr_post.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
     xhr_post.onload = function() {
         if (xhr_post.status === 200) {
@@ -68,9 +68,10 @@ document.querySelector("#query-button").addEventListener("click", function() {
 });
 document.querySelector("#todo-form").addEventListener("submit", function(event) {
     event.preventDefault();
+    var id = document.querySelector("#user-id").value;
     var formData = new FormData(document.querySelector("#todo-form"));
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://gorest.co.in/public/v2/todos");
+    xhr.open("POST", `https://gorest.co.in/public/v2/users/${id}/todos`);
     xhr.setRequestHeader("Authorization", "Bearer 7991ba7b8480a1063d1c0780e4ba6f803f17c6ee8336c726729091527b30808f");
     xhr.onload = function() {
         if (xhr.status === 201) {

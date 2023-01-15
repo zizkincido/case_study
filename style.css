@@ -1,50 +1,59 @@
-form {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background-color: #f2f2f2;
-  padding: 1em;
-  border-radius: 10px;
-}
-
-label {
-  font-size: 1.2em;
-  margin-right: 0.5em;
-  min-width: 150px;
-  font-weight: bold;
-}
-
-input[type="text"], input[type="email"], select {
-  padding: 0.5em;
-  font-size: 1.2em;
-  border-radius: 5px;
-  border: 2px solid #ccc;
-  margin-bottom: 0.5em;
-  flex-grow: 1;
-}
-
-input[type="submit"] {
+#query-button {
+  padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
-  padding: 0.5em 1em;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
-  margin-left: 0.5em;
-  font-weight: bold;
-}
-
-input[type="submit"]:hover {
+  margin-top: 10px;
+  }
+  
+  #todo-form input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  }
+  #user-form input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  }
+  
+  #query-button:hover, #todo-form input[type="submit"]:hover, #user-form input[type="submit"]:hover {
   background-color: #3e8e41;
-}
-
-input[type="text"]:focus, input[type="email"]:focus, select:focus {
-  background-color: #f2f2f2;
-  border-color: #4CAF50;
-}
-.user-info-block {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10
-}
+  }
+  
+  #user-info, #post_list {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  }
+  
+  #user-form, #todo-form,#query-button {
+  margin-top: 10px;
+  }
+  
+  label {
+  display: block;
+  margin-top: 10px;
+  }
+  
+  input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;}
