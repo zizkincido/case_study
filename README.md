@@ -1,5 +1,5 @@
 # case_study
-PROJE BİLGİLERİ
+## PROJE BİLGİLERİ
 1. Kullanıcıların isim – soyisim, email adresi ve cinsiyet bilgilerini girebileceği bir arayüz
 hazırlayınız. Arayüzden alınan bilgileri;
 - Kadın kullanıcıların “status” bilgisi active,
@@ -13,5 +13,5 @@ postu olmayan en az 1 kullanıcı olmasını rica ederiz.)
 3. Kullanıcı ID bilgisi ile to-do atanabilecek bir arayüz hazırlayınız.
 4. Kullanıcıların bilgilerini kaynaktaki endpointten çekip JSON formatında kendi oluşturduğunuz
 bir endpointten verecek API’yi hazırlayınız. Hazırladığınız endpoint, token ile çalışmalıdır.
-KAYNAKLAR
+## KAYNAKLAR
 https://gorest.co.in/ linkinde yer alan API’lar kullanılmalıdır.
